@@ -1,7 +1,8 @@
+import json
+
 import frappe
 from frappe import _
-from frappe.utils.cache import get_cache
-import json
+from frappe.utils.caching import redis_cache as get_cache
 
 
 @frappe.whitelist(allow_guest=False)
@@ -101,12 +102,12 @@ def list_tasks(page=1, page_size=10):
     List tasks with pagination.
     """
     try:
-        offset = (int(page) - 1) * int(page_size)
+        limit_start = (int(page) - 1) * int(page_size)
         tasks = frappe.get_all(
             "Task",
             fields=["name", "title", "status", "priority", "due_date"],
             limit_page_length=page_size,
-            offset=offset,
+            limit_start=limit_start,  # changed from 'offset' to 'limit_start'
             order_by="creation desc",
         )
         return {"status": "success", "tasks": tasks}

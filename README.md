@@ -17,8 +17,6 @@
   - [7. Start the Development Server](#7-start-the-development-server)
 - [Usage](#usage)
 - [Troubleshooting](#troubleshooting)
-- [Further Reading](#further-reading)
-- [License](#license)
 
 ## Prerequisites
 
